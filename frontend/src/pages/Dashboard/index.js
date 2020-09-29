@@ -8,14 +8,23 @@ const Login = () => {
   const [usersWithToken, setUsersWithToken] = useState([]);
   const [usersWithoutToken, setUsersWithoutToken] = useState([]);
 
+  /**
+   * acessa rota api/users para listagem de usuários sem o token
+   * o acesso só é liberado caso o usuário esteja com o cookie válido no navegador
+   */ 
   const listUsersWithoutToken = () => {
     api.get('api/users').then((response) => {
       setUsersWithoutToken(response.data);
     })
   }
 
+  /**
+   * acessa rota api/users para listagem de usuários com o token
+   * desde que o usuário esteja com um token válido o acesso sempre é autorizado
+   * se o usuário estiver com o cookie de sessão válido o token é opcional
+   */
   const listUsersWithToken = () => {
-    const token = '7|VBVkFsr6mcblhRrXCQYoMggTW8XGzp6cwjzzucRG';
+    const token = 'seu-token-aqui';
     const config = {
         headers: { Authorization: `Bearer ${token}` }
     };

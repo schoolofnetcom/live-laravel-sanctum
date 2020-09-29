@@ -18,7 +18,9 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     
+    // prepara o navegador criando cookies de sessão pra a próxima rota de login
     await api.get('sanctum/csrf-cookie');
+    // efetua o login no laravel
     await api.post('login', data);
   }
 
